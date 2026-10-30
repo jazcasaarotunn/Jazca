@@ -1,1 +1,278 @@
-kalkulator modulo
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jazca Saarotun - 262505015 - Kalkulator Aritmatika Modulo</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #101b3d, #34236b, #7552a5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 15px 40px #0005;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    font-size: 13px;
+    color: #d7caff;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    color: white;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: #f5f0ff;
+    color: #34236b;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #a78bfa, #6c63ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px #0004;
+}
+
+.result {
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #f3edff;
+    color: #34236b;
+    display: none;
+}
+
+.result h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #6844b7;
+}
+
+.result p {
+    margin: 10px 0;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.hasil {
+    margin-top: 15px;
+    padding: 15px;
+    background: #d9ccff;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.hasil strong {
+    display: block;
+    font-size: 30px;
+    color: #5935b0;
+    margin-top: 5px;
+}
+
+.footer {
+    color: #d7caff;
+    text-align: center;
+    font-size: 11px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>✦ MODULO CALCULATOR ✦</h1>
+        <p>Kalkulator Aritmatika Modulo</p>
+    </div>
+
+    <div class="form-group">
+        <label>Bilangan Pertama (a)</label>
+        <input type="number" id="a" placeholder="Masukkan angka pertama">
+    </div>
+
+    <div class="form-group">
+        <label>Operasi Aritmatika</label>
+        <select id="operator">
+            <option value="+">Penjumlahan (+)</option>
+            <option value="-">Pengurangan (-)</option>
+            <option value="*">Perkalian (×)</option>
+            <option value="^">Perpangkatan (^)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Bilangan Kedua (b)</label>
+        <input type="number" id="b" placeholder="Masukkan angka kedua">
+    </div>
+
+    <div class="form-group">
+        <label>Modulus (n)</label>
+        <input type="number" id="n" placeholder="Masukkan nilai modulus">
+    </div>
+
+    <button onclick="hitungModulo()">
+        ✨ HITUNG MODULO
+    </button>
+
+    <div class="result" id="result">
+        <h3>✧ Hasil Perhitungan ✧</h3>
+        <p id="rumus"></p>
+        <p id="proses"></p>
+
+        <div class="hasil">
+            Hasil Akhir
+            <strong id="jawaban">0</strong>
+        </div>
+    </div>
+
+    <div class="footer">
+        Mathematics is beautiful ✦
+    </div>
+
+</div>
+
+<script>
+function hitungModulo() {
+    const a = Number(document.getElementById("a").value);
+    const b = Number(document.getElementById("b").value);
+    const n = Number(document.getElementById("n").value);
+    const op = document.getElementById("operator").value;
+
+    if (
+        document.getElementById("a").value === "" ||
+        document.getElementById("b").value === "" ||
+        document.getElementById("n").value === "" ||
+        !Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(n) ||
+        n <= 0
+    ) {
+        alert("Masukkan bilangan bulat yang valid dan modulus harus lebih dari 0!");
+        return;
+    }
+
+    let hasil;
+    let operasi;
+    let proses;
+
+    // Menghitung operasi aritmatika
+    if (op === "+") {
+        hasil = a + b;
+        operasi = `${a} + ${b}`;
+    }
+    else if (op === "-") {
+        hasil = a - b;
+        operasi = `${a} - ${b}`;
+    }
+    else if (op === "*") {
+        hasil = a * b;
+        operasi = `${a} × ${b}`;
+    }
+    else {
+        operasi = `${a}^${b}`;
+
+        // Perpangkatan modulo dengan algoritma
+        let base = ((a % n) + n) % n;
+        let exponent = b;
+
+        if (exponent < 0) {
+            alert("Pangkat negatif belum didukung.");
+            return;
+        }
+
+        hasil = 1 % n;
+
+        while (exponent > 0) {
+            if (exponent % 2 === 1) {
+                hasil = (hasil * base) % n;
+            }
+
+            base = (base * base) % n;
+            exponent = Math.floor(exponent / 2);
+        }
+    }
+
+    if (!Number.isSafeInteger(hasil)) {
+        alert("Angka terlalu besar untuk perhitungan yang aman.");
+        return;
+    }
+
+    // Normalisasi hasil agar selalu positif
+    const modulo = ((hasil % n) + n) % n;
+
+    proses = `${operasi} mod ${n} = ${hasil} mod ${n} = ${modulo}`;
+
+    document.getElementById("rumus").innerHTML =
+        `<b>Rumus:</b> (${operasi}) mod ${n}`;
+
+    document.getElementById("proses").innerHTML =
+        `<b>Proses:</b> ${proses}`;
+
+    document.getElementById("jawaban").textContent = modulo;
+
+    document.getElementById("result").style.display = "block";
+}
+</script>
+
+</body>
+</html>
+
