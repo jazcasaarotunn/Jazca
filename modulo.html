@@ -2,277 +2,372 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jazca Saarotun - 262505015 - Kalkulator Aritmatika Modulo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jazca Saarotun - 262505015 - Kalkulator Aritmatika Modulo</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #101b3d, #34236b, #7552a5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
 
-.container {
-    width: 100%;
-    max-width: 450px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(15px);
-    padding: 30px;
-    border-radius: 25px;
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 15px 40px #0005;
-}
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
 
-.header {
-    text-align: center;
-    color: white;
-    margin-bottom: 25px;
-}
+        h1 {
+            text-align: center;
+            color: #243b55;
+            margin-bottom: 10px;
+        }
 
-.header h1 {
-    font-size: 24px;
-    margin-bottom: 8px;
-}
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
 
-.header p {
-    font-size: 13px;
-    color: #d7caff;
-}
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
 
-.form-group {
-    margin-bottom: 17px;
-}
+        .tabs button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #ddd;
+            font-weight: bold;
+        }
 
-label {
-    display: block;
-    color: white;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
+        .tabs button.active {
+            background: #243b55;
+            color: white;
+        }
 
-input, select {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    outline: none;
-    border-radius: 12px;
-    background: #f5f0ff;
-    color: #34236b;
-    font-size: 16px;
-}
+        .section {
+            display: none;
+        }
 
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #a78bfa, #6c63ff);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        .section.active {
+            display: block;
+        }
 
-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px #0004;
-}
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: bold;
+            color: #333;
+        }
 
-.result {
-    margin-top: 22px;
-    padding: 20px;
-    border-radius: 15px;
-    background: #f3edff;
-    color: #34236b;
-    display: none;
-}
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-.result h3 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #6844b7;
-}
+        .calculate {
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #243b55;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-.result p {
-    margin: 10px 0;
-    font-size: 14px;
-    word-break: break-word;
-}
+        .calculate:hover {
+            background: #365b80;
+        }
 
-.hasil {
-    margin-top: 15px;
-    padding: 15px;
-    background: #d9ccff;
-    border-radius: 12px;
-    text-align: center;
-}
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #edf4ff;
+            border-left: 5px solid #243b55;
+            border-radius: 8px;
+            display: none;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
 
-.hasil strong {
-    display: block;
-    font-size: 30px;
-    color: #5935b0;
-    margin-top: 5px;
-}
+        .result strong {
+            color: #243b55;
+        }
 
-.footer {
-    color: #d7caff;
-    text-align: center;
-    font-size: 11px;
-    margin-top: 20px;
-}
-</style>
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="header">
-        <h1>✦ MODULO CALCULATOR ✦</h1>
-        <p>Kalkulator Aritmatika Modulo</p>
+    <h1>Kalkulator Modulo</h1>
+    <p class="subtitle">Kalkulator Aritmatika Modular</p>
+
+    <div class="tabs">
+        <button class="active" onclick="showTab('basic', this)">
+            Modulo Basic
+        </button>
+
+        <button onclick="showTab('congruence', this)">
+            Kongruensi
+        </button>
     </div>
 
-    <div class="form-group">
+    <!-- MODULO BASIC -->
+    <div id="basic" class="section active">
+
+        <h3>Kalkulator Modulo Basic</h3>
+
         <label>Bilangan Pertama (a)</label>
-        <input type="number" id="a" placeholder="Masukkan angka pertama">
-    </div>
+        <input type="number" id="a" placeholder="Masukkan bilangan pertama">
 
-    <div class="form-group">
         <label>Operasi Aritmatika</label>
         <select id="operator">
             <option value="+">Penjumlahan (+)</option>
             <option value="-">Pengurangan (-)</option>
-            <option value="*">Perkalian (×)</option>
+            <option value="*">Perkalian (*)</option>
             <option value="^">Perpangkatan (^)</option>
         </select>
-    </div>
 
-    <div class="form-group">
         <label>Bilangan Kedua (b)</label>
-        <input type="number" id="b" placeholder="Masukkan angka kedua">
-    </div>
+        <input type="number" id="b" placeholder="Masukkan bilangan kedua">
 
-    <div class="form-group">
         <label>Modulus (n)</label>
-        <input type="number" id="n" placeholder="Masukkan nilai modulus">
+        <input type="number" id="n" placeholder="Masukkan modulus">
+
+        <button class="calculate" onclick="calculateModulo()">
+            Hitung Modulo
+        </button>
+
+        <div class="result" id="basicResult"></div>
+
     </div>
 
-    <button onclick="hitungModulo()">
-        ✨ HITUNG MODULO
-    </button>
+    <!-- PENGECEKAN KONGRUENSI -->
+    <div id="congruence" class="section">
 
-    <div class="result" id="result">
-        <h3>✧ Hasil Perhitungan ✧</h3>
-        <p id="rumus"></p>
-        <p id="proses"></p>
+        <h3>Pengecekan Kongruensi</h3>
 
-        <div class="hasil">
-            Hasil Akhir
-            <strong id="jawaban">0</strong>
-        </div>
+        <label>Bilangan Pertama (a)</label>
+        <input type="number" id="x" placeholder="Masukkan bilangan a">
+
+        <label>Bilangan Kedua (b)</label>
+        <input type="number" id="y" placeholder="Masukkan bilangan b">
+
+        <label>Modulus (n)</label>
+        <input type="number" id="mod" placeholder="Masukkan modulus">
+
+        <button class="calculate" onclick="checkCongruence()">
+            Cek Kongruensi
+        </button>
+
+        <div class="result" id="congruenceResult"></div>
+
     </div>
 
     <div class="footer">
-        Mathematics is beautiful ✦
+        Kalkulator Aritmatika Modulo
     </div>
 
 </div>
 
 <script>
-function hitungModulo() {
-    const a = Number(document.getElementById("a").value);
-    const b = Number(document.getElementById("b").value);
-    const n = Number(document.getElementById("n").value);
-    const op = document.getElementById("operator").value;
 
-    if (
-        document.getElementById("a").value === "" ||
-        document.getElementById("b").value === "" ||
-        document.getElementById("n").value === "" ||
-        !Number.isSafeInteger(a) ||
-        !Number.isSafeInteger(b) ||
-        !Number.isSafeInteger(n) ||
-        n <= 0
-    ) {
-        alert("Masukkan bilangan bulat yang valid dan modulus harus lebih dari 0!");
-        return;
+    // Fungsi untuk berpindah tab
+    function showTab(tab, button) {
+        document.querySelectorAll('.section').forEach(s => {
+            s.classList.remove('active');
+        });
+
+        document.querySelectorAll('.tabs button').forEach(b => {
+            b.classList.remove('active');
+        });
+
+        document.getElementById(tab).classList.add('active');
+        button.classList.add('active');
     }
 
-    let hasil;
-    let operasi;
-    let proses;
-
-    // Menghitung operasi aritmatika
-    if (op === "+") {
-        hasil = a + b;
-        operasi = `${a} + ${b}`;
+    // Fungsi modulo agar hasil selalu non-negatif
+    function modulo(a, n) {
+        return ((a % n) + n) % n;
     }
-    else if (op === "-") {
-        hasil = a - b;
-        operasi = `${a} - ${b}`;
-    }
-    else if (op === "*") {
-        hasil = a * b;
-        operasi = `${a} × ${b}`;
-    }
-    else {
-        operasi = `${a}^${b}`;
 
-        // Perpangkatan modulo dengan algoritma
-        let base = ((a % n) + n) % n;
-        let exponent = b;
+    // Kalkulator modulo basic
+    function calculateModulo() {
+        const a = Number(document.getElementById('a').value);
+        const b = Number(document.getElementById('b').value);
+        const n = Number(document.getElementById('n').value);
+        const op = document.getElementById('operator').value;
 
-        if (exponent < 0) {
-            alert("Pangkat negatif belum didukung.");
+        const resultBox = document.getElementById('basicResult');
+
+        if (
+            document.getElementById('a').value === '' ||
+            document.getElementById('b').value === '' ||
+            document.getElementById('n').value === ''
+        ) {
+            alert("Semua input harus diisi!");
             return;
         }
 
-        hasil = 1 % n;
-
-        while (exponent > 0) {
-            if (exponent % 2 === 1) {
-                hasil = (hasil * base) % n;
-            }
-
-            base = (base * base) % n;
-            exponent = Math.floor(exponent / 2);
+        if (![a, b, n].every(Number.isSafeInteger)) {
+            alert("Masukkan bilangan bulat yang valid!");
+            return;
         }
+
+        if (n <= 0) {
+            alert("Modulus harus lebih besar dari 0!");
+            return;
+        }
+
+        let operasi;
+        let hasil;
+
+        switch (op) {
+            case '+':
+                operasi = a + b;
+                break;
+
+            case '-':
+                operasi = a - b;
+                break;
+
+            case '*':
+                operasi = a * b;
+                break;
+
+            case '^':
+                if (b < 0) {
+                    alert("Pangkat tidak boleh negatif!");
+                    return;
+                }
+
+                // Perhitungan perpangkatan modular
+                let base = modulo(a, n);
+                let exponent = b;
+                hasil = 1;
+
+                while (exponent > 0) {
+                    if (exponent % 2 === 1) {
+                        hasil = modulo(hasil * base, n);
+                    }
+
+                    base = modulo(base * base, n);
+                    exponent = Math.floor(exponent / 2);
+                }
+
+                break;
+        }
+
+        if (op !== '^') {
+            hasil = modulo(operasi, n);
+        }
+
+        resultBox.style.display = 'block';
+
+        resultBox.innerHTML = `
+            <strong>Hasil Perhitungan:</strong><br>
+            ${a} ${op} ${b} (mod ${n})<br>
+            <strong>Hasil:</strong> ${hasil}
+        `;
     }
 
-    if (!Number.isSafeInteger(hasil)) {
-        alert("Angka terlalu besar untuk perhitungan yang aman.");
-        return;
+    // Fungsi pengecekan kongruensi
+    function checkCongruence() {
+        const a = Number(document.getElementById('x').value);
+        const b = Number(document.getElementById('y').value);
+        const n = Number(document.getElementById('mod').value);
+
+        const resultBox =
+            document.getElementById('congruenceResult');
+
+        if (
+            document.getElementById('x').value === '' ||
+            document.getElementById('y').value === '' ||
+            document.getElementById('mod').value === ''
+        ) {
+            alert("Semua input harus diisi!");
+            return;
+        }
+
+        if (![a, b, n].every(Number.isSafeInteger)) {
+            alert("Masukkan bilangan bulat yang valid!");
+            return;
+        }
+
+        if (n <= 0) {
+            alert("Modulus harus lebih besar dari 0!");
+            return;
+        }
+
+        const sisaA = modulo(a, n);
+        const sisaB = modulo(b, n);
+
+        const selisih = a - b;
+        const kongruen = sisaA === sisaB;
+
+        resultBox.style.display = 'block';
+
+        resultBox.innerHTML = `
+            <strong>Hasil Pengecekan:</strong><br><br>
+
+            a = ${a}<br>
+            b = ${b}<br>
+            Modulus = ${n}<br><br>
+
+            Sisa ${a} mod ${n} = ${sisaA}<br>
+            Sisa ${b} mod ${n} = ${sisaB}<br><br>
+
+            Selisih a - b = ${selisih}<br><br>
+
+            <strong>
+                ${kongruen
+                    ? "✓ KONGRUEN"
+                    : "✗ TIDAK KONGRUEN"}
+            </strong><br>
+
+            ${kongruen
+                ? `${a} ≡ ${b} (mod ${n})`
+                : `${a} ≢ ${b} (mod ${n})`}
+        `;
     }
 
-    // Normalisasi hasil agar selalu positif
-    const modulo = ((hasil % n) + n) % n;
-
-    proses = `${operasi} mod ${n} = ${hasil} mod ${n} = ${modulo}`;
-
-    document.getElementById("rumus").innerHTML =
-        `<b>Rumus:</b> (${operasi}) mod ${n}`;
-
-    document.getElementById("proses").innerHTML =
-        `<b>Proses:</b> ${proses}`;
-
-    document.getElementById("jawaban").textContent = modulo;
-
-    document.getElementById("result").style.display = "block";
-}
 </script>
 
 </body>
 </html>
+
 
